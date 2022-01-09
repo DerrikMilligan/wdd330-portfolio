@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+		</style>
+
+  </head>
+  <body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 1 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+					Honestly this week was mostly a review. I can re-iterate some stuff though.
+				</p>
+				<ul class="list-disc">
+					<li>
+						<b>LocalStorage:</b> A key store that remains as a session in the users browser storage. Allows you to persist data between visits.
+					</li>
+					<li>
+						<b>Const/let:</b> Been using these for a long time. Const prevents you from <i>assigning</i> to a variable again, though for arrays/objects you can still mutate the data within.
+					</li>
+					<li>
+						<b>Mobile First:</b> It's easier to design for mobile and then adjust the design for larger resolutions than it is to design for large screens and attempt to scale down.
+					</li>
+					<li>
+						<b>Users Attention:</b> User's attention spans are pretty small and the faster and easier to use your application is the more users will use it. Google noticed they lose 20% of users per half second longer the page takes to load.
+					</li>
+				</ul>
+			</div>
+		</div>
+  </body>
+</html>
+
