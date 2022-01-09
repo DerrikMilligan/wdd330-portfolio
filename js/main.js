@@ -48,7 +48,11 @@ const linkInfo = [
 			{
 				label: 'Notes',
 				url: 'week1/notes.html',
-			}
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week1/report.html',
+			},
 		],
 	},
 ];
