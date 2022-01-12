@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 1 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+					I figured I'd just do some code from the examples instead this week because I've done a lot of JavaScript.
+				</p>
+
+				<p class="my-5">
+					The `Run Code` buttons load it in a typescript playground... Unfortunately it also prepends `#src/` so if you delete that then you can correctly run each of the examples.
+				</p>
+
+				<h2>2.1 Triangle</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+for (let i = 1; i < 8; i++) {
+	console.log('#'.repeat(i));
+}
+						</code>
+					</pre>
+				</div>
+
+				<h2>2.2 Fizz Buzz</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+for (let i = 1; i <= 100; i++) {
+	if      (i % 3 === 0 && i % 5 === 0) { console.log('Fizz Buzz'); }
+	else if (i % 3 === 0)                { console.log('Fizz'); }
+	else if (i % 5 === 0)                { console.log('Buzz'); }
+	else                                 { console.log(i); }
+}
+						</code>
+					</pre>
+				</div>
+
+				<h2>2.3 Chess Board</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+const printChessBoard = (size: number): void => {
+	if (size <= 0) {
+		console.log('Invalid size.');
+	}
+	
+	let board = '\n';
+	for (let i = 0; i < size; i++) {
+		let row = '';
+		for (let j = 0; j < size; j++) {
+			if (i % 2 !== j % 2) {
+				row += '#';
+			}
+
+			row += ' ';
+		}
+
+		board += `${row}\n`;
+	}
+
+	console.log(board);
+}
+
+printChessBoard(8);
+						</code>
+					</pre>
+				</div>
+
+				<h2>3.1 Minimum</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+	const min = (a: number, b: number): number => a > b ? b : a;
+
+	console.log(min(0, 10));
+	// → 0
+	console.log(min(0, -10));
+	// → -10
+						</code>
+					</pre>
+				</div>
+
+				<h2>3.2 Recursion</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+	const isEven = (num: number): boolean => {
+		if (num < 0) return isEven(num * -1);
+		if (num === 0) return true;
+		if (num === 1) return false;
+		return isEven(num - 2);
+	};
+
+	console.log(isEven(50));
+	// → true
+	console.log(isEven(75));
+	// → false
+	console.log(isEven(-1));
+	// → false
+						</code>
+					</pre>
+				</div>
+
+				<h2>3.3 Bean Counting</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+const countChar = (haystack: string, needle: string, ignoreCase = true): number => {
+	return haystack
+		.split('')
+		.map((char: string) => ignoreCase ? char : char.toLowerCase())
+		.filter((char: string) => char === needle)
+		.length;
+}
+
+const countBs = (haystack: string): number => {
+	return countChar(haystack, 'B', false);
+}
+
+// Not we're NOT ignoring the case and get 2 back
+console.log(countBs("BBCbb"));
+// → 2
+console.log(countChar("kakkerlak", "k"));
+// → 4
+						</code>
+					</pre>
+				</div>
+
+			</div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+
