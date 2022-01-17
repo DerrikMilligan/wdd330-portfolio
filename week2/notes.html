@@ -161,7 +161,7 @@ printChessBoard(8);
 const countChar = (haystack: string, needle: string, ignoreCase = true): number => {
 	return haystack
 		.split('')
-		.map((char: string) => ignoreCase ? char : char.toLowerCase())
+		.map((char: string) => ignoreCase ? char.toLowerCase() : char)
 		.filter((char: string) => char === needle)
 		.length;
 }
@@ -170,7 +170,7 @@ const countBs = (haystack: string): number => {
 	return countChar(haystack, 'B', false);
 }
 
-// Not we're NOT ignoring the case and get 2 back
+// Note we're NOT ignoring the case and get 2 back
 console.log(countBs("BBCbb"));
 // → 2
 console.log(countChar("kakkerlak", "k"));
