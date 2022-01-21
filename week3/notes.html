@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 3 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+					I figured I'd just do some code from the examples instead this week because I've done a lot of JavaScript.
+				</p>
+
+				<p class="my-5">
+					The `Run Code` buttons load it in a typescript playground... Unfortunately it also prepends `#src/` so if you delete that then you can correctly run each of the examples.
+				</p>
+
+				<h2>14.1 Build a table</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+const MOUNTAINS = [
+  { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+  { name: "Everest", height: 8848, place: "Nepal" },
+  { name: "Mount Fuji", height: 3776, place: "Japan" },
+  { name: "Vaalserberg", height: 323, place: "Netherlands" },
+  { name: "Denali", height: 6168, place: "United States" },
+  { name: "Popocatepetl", height: 5465, place: "Mexico" },
+  { name: "Mont Blanc", height: 4808, place: "Italy/France" }
+];
+
+const createEl = (tag: string): HTMLElement => document.createElement(tag);
+const createText = (text: string | number): Text => document.createTextNode(text.toString());
+
+const buildTableHeader = (obj: { [index: string]: any }): HTMLElement => {
+  const thead = createEl('thead');
+  const tr = createEl('tr');
+
+  Object.keys(obj).forEach((key: string) => {
+    const td = createEl('td');
+    td.style.fontWeight = 'bold';
+    td.appendChild(createText(key));
+    tr.append(td);
+  });
+
+  thead.appendChild(tr);
+  return thead;
+};
+
+const buildObjectTable = (info: Array<any>): HTMLElement => {
+  const table = createEl('table');
+
+  // Build header
+  table.appendChild(buildTableHeader(info[0]));
+
+  const tbody = createEl('tbody');
+
+  info.forEach((row: { name: string, height: number, place: string }) => {
+    const tr = createEl('tr');
+    Object.values(row).forEach((data: number | string) => {
+      const td = createEl('td');
+      td.appendChild(createText(data));
+      td.style.textAlign = (typeof data === 'number') ? 'right' : 'center';
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+
+  return table;
+};
+
+const mountainEl = document.querySelector('#mountains');
+if (mountainEl) {
+  mountainEl.innerHTML = '';
+  mountainEl.appendChild(buildObjectTable(MOUNTAINS));
+} else {
+  console.log(buildObjectTable(MOUNTAINS).outerHTML);
+}
+						</code>
+					</pre>
+				</div>
+
+				<h2>14.2 Elements by tag name</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+const byTagName = (node, tag) => {
+  let elements = [];
+
+  if (tag.toLowerCase() === node.nodeName.toLowerCase()) {
+    elements.push(node);
+  }
+  
+  if (node.children.length > 0) {
+    Array.from(node.children)
+      .filter((child) => child.nodeType === document.ELEMENT_NODE)
+      .forEach((child) => {
+        elements = elements.concat(byTagName(child, tag));
+      });
+  }
+  
+  return elements;
+};
+						</code>
+					</pre>
+				</div>
+
+				<h2>14.3 The cat's hat</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+<!doctype html>
+
+<meta charset="utf8">
+
+<base href="https://eloquentjavascript.net/">
+
+<style>body { min-height: 200px }</style>
+<img src="img/hat.png" id="hat" style="position: absolute">
+<img src="img/cat.png" id="cat" style="position: absolute">
+
+<script>
+  let cat = document.querySelector("#cat");
+  let hat = document.querySelector("#hat");
+
+  let angle = 0;
+  let lastTime = null;
+  function animate(time) {
+    if (lastTime != null) angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    cat.style.top = (Math.sin(angle) * 40 + 40) + "px";
+    cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
+
+    hat.style.top = (Math.sin(angle) * 40) + "px";
+    hat.style.left = (Math.cos(angle) * 200 + 240) + "px";
+
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+</script>
+						</code>
+					</pre>
+				</div>
+
+				<h2>15.1 Balloon</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+let balloon = document.querySelector("p");
+let size = 0;
+
+const setSize = (newSize) => {
+  size = newSize;
+  balloon.style.fontSize = `${newSize}px`;
+}
+
+const balloonIncrease = () => {
+  if (size > 100) {
+    balloon.textContent = '💥';
+    return false;
+  }
+
+  setSize(size * 1.1);
+  return true;
+}
+
+const keypress = (event) => {
+  if (event.key === 'ArrowUp') {
+    event.preventDefault();
+    if (balloonIncrease() === false) {
+      document.body.removeEventListener('keydown', keypress);
+    }
+  }
+}
+
+setSize(20);
+document.body.addEventListener('keydown', keypress);
+            </code>
+					</pre>
+				</div>
+
+				<h2>3.2 Mouse Trail</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+const trail = [];
+const maxTrail = 12;
+
+const createDot = (x, y) => {
+  const dot = document.createElement('div');
+  dot.classList.add('trail');
+  dot.style.left = `${x}px`;
+  dot.style.top = `${y}px`;
+  document.body.appendChild(dot);
+
+  trail.push(dot);
+
+  if (trail.length >= maxTrail) {
+    const el = trail.shift();
+    el.parentNode.removeChild(el);
+  }
+};
+
+window.addEventListener('mousemove', (e) => {
+  createDot(e.pageX, e.pageY);
+});
+						</code>
+					</pre>
+				</div>
+
+				<h2>15.3 Tabs</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+<!doctype html>
+
+<tab-panel>
+  <div data-tabname="one">Tab one</div>
+  <div data-tabname="two">Tab two</div>
+  <div data-tabname="three">Tab three</div>
+</tab-panel>
+<script>
+  const asTabs = (node) => {
+    let tabs = [];
+    
+    const activateTab = (tab) => {
+      tabs.forEach((tabInfo) => { 
+        console.log(tab, tabInfo);
+        const isActive = tab.name === tabInfo.name;
+
+        tabInfo.button.style.color   = isActive ? 'red'   : 'black';
+        tabInfo.div   .style.display = isActive ? 'block' : 'none';
+      });
+    };
+    
+    tabs = Array.from(node.children).map((tabEl) => {
+      const btn = document.createElement('button');
+      const div = document.createElement('div');
+
+      const tab = {
+        name  : tabEl.getAttribute('data-tabname'),
+        el    : tabEl,
+        button: btn,
+        div   : div,
+      };
+      
+      div.innerHTML = tabEl.innerHTML;
+
+      btn.textContent = tab.name;
+      btn.addEventListener('click', () => activateTab(tab));
+      
+      tabEl.innerHTML = '';
+      tabEl.appendChild(btn);
+      tabEl.appendChild(div);
+      
+      return tab;
+    });
+
+    activateTab(tabs[0]);
+  };
+
+  asTabs(document.querySelector('tab-panel'));
+</script>
+						</code>
+					</pre>
+				</div>
+
+			</div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+

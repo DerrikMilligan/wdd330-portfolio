@@ -69,6 +69,20 @@ const linkInfo = [
 			},
 		],
 	},
+	{
+		label: 'Week 3',
+		// url: 'week1/index.html',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week3/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week3/report.html',
+			},
+		],
+	},
 ];
 
 const elPortfolio = document.querySelector('#portfolio');
