@@ -67,11 +67,13 @@ export class TicTacToe {
     setTimeout(() => {
       if (!this.checkForWinner()) {
         this.switchPlayer();
+      } else {
+        this.removeOldListeners();
       }
     }, 100);
   }
 
-  checkForWinner() {
+  checkForHorizontalWin() {
     // Check for horizontal wins
     for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
       const row = this.board[rowIndex];
@@ -92,6 +94,10 @@ export class TicTacToe {
       }
     }
 
+    return false;
+  }
+
+  checkForVerticalWin() {
     // Check for vertical wins
     for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
       let win = true;
@@ -111,6 +117,10 @@ export class TicTacToe {
       }
     }
 
+    return false;
+  }
+
+  checkForDiagonalWin() {
     // Check for diagonal wins
     let win = true;
     let player = this.board[0][0].value;
@@ -142,6 +152,10 @@ export class TicTacToe {
       return true;
     }
 
+    return false;
+  }
+
+  checkForDraw() {
     // Check for a draw
     let draw = true;
     for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
@@ -160,6 +174,16 @@ export class TicTacToe {
     }
 
     return false;
+  }
+
+  checkForWinner() {
+    return (
+      this.checkForHorizontalWin() ||
+      this.checkForVerticalWin()   ||
+      this.checkForDiagonalWin()   ||
+      this.checkForDraw()          ||
+      false
+    );
   }
 
   switchPlayer() {
