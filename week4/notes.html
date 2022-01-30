@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 4 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+					I figured I'd just do some code from the examples instead this week because I've done a lot of JavaScript.
+				</p>
+
+				<p class="my-5">
+					The `Run Code` buttons load it in a typescript playground... Unfortunately it also prepends `#src/` so if you delete that then you can correctly run each of the examples.
+				</p>
+
+				<h2>6.1 A Vector Type</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+class Vec {
+  y: number = 0;
+  x: number = 0;
+
+  public constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public plus(v2: Vec): Vec {
+    return new Vec(this.x + v2.x, this.y + v2.y);
+  }
+
+  public minus(v2: Vec): Vec {
+    return new Vec(this.x - v2.x, this.y - v2.y);
+  }
+
+  get length(): number {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+}
+
+console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// → Vec{x: 3, y: 5}
+console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// → Vec{x: -1, y: -1}
+console.log(new Vec(3, 4).length);
+// → 5
+						</code>
+					</pre>
+				</div>
+
+				<h2>6.2 Groups</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+class Group {
+  members: Set&lt;number&gt;
+
+  constructor(members: Iterable&lt;number&gt;) {
+    this.members = new Set(members);
+  }
+
+  static from(members: Iterable&lt;number&gt;) {
+    return new Group(members);
+  }
+
+  has(value: number): boolean {
+    return this.members.has(value);
+  }
+
+  add(value: number): Group {
+    this.members.add(value);
+
+    return this;
+  }
+
+  del(value: number): Group {
+    this.members.delete(value);
+
+    return this;
+  }
+}
+
+let group = Group.from([10, 20]);
+console.log(group.has(10));
+// → true
+console.log(group.has(30));
+// → false
+group.add(10);
+group.del(10);
+console.log(group.has(10));
+// → false
+            </code>
+					</pre>
+				</div>
+
+				<h2>6.3 Iterable groups</h2>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+class GroupIterator &lt;T&gt; {
+  private index: number;
+  private group: Group&lt;T&gt;;
+
+  constructor(group: Group&lt;T&gt;) {
+    this.group = group;
+    this.index = 0;
+  }
+
+  public next(): { done: boolean, value?: T } {
+    if (this.index === this.group.members.length) {
+      return { done: true };
+    }
+
+    return { done: false, value: this.group.members[this.index++] };
+  }
+}
+
+class Group &lt;T&gt; {
+  public members: Array&lt;T&gt;;
+
+  constructor(members: Iterable&lt;T&gt;) {
+    this.members = Array.from(members);
+  }
+
+  public static from(members: Iterable&lt;any&gt;) {
+    return new Group(members);
+  }
+
+  public has(value: T): boolean {
+    return this.members.includes(value);
+  }
+
+  public add(value: T): Group&lt;T&gt; {
+    if (!this.has(value)) {
+      this.members.push(value);
+    }
+
+    return this;
+  }
+
+  public del(value: T): Group&lt;T&gt; {
+    this.members = this.members.filter((val) => val !== value);
+
+    return this;
+  }
+
+  [Symbol.iterator]() {
+    return new GroupIterator&lt;T&gt;(this);
+  }
+}
+
+for (let value of Group.from(["a", "b", "c"])) {
+  console.log(value);
+}
+// → a
+// → b
+// → c
+						</code>
+					</pre>
+				</div>
+
+				<h2>6.4 Borrowing a Method</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+let map = { one: true, two: true, hasOwnProperty: true };
+
+console.log(Object.prototype.hasOwnProperty.call(map, 'one'));
+            </code>
+					</pre>
+				</div>
+
+				<h2>10.2 Roads module</h2>
+				<div>
+					<button type="button" class="run-code btn">
+						Run Code
+					</button>
+					<pre>
+						<code class="language-typescript">
+// This wont run but is how we'd import it
+import { buildGraph } from './graph';
+
+const roads = [
+  "Alice's House-Bob's House",   "Alice's House-Cabin",
+  "Alice's House-Post Office",   "Bob's House-Town Hall",
+  "Daria's House-Ernie's House", "Daria's House-Town Hall",
+  "Ernie's House-Grete's House", "Grete's House-Farm",
+  "Grete's House-Shop",          "Marketplace-Farm",
+  "Marketplace-Post Office",     "Marketplace-Shop",
+  "Marketplace-Town Hall",       "Shop-Town Hall"
+];
+
+exports.roadGraph = buildGraph(roads.map(road => road.split('-')));
+						</code>
+					</pre>
+				</div>
+
+			</div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+

@@ -71,7 +71,6 @@ const linkInfo = [
 	},
 	{
 		label: 'Week 3',
-		// url: 'week1/index.html',
 		subItems:  [
 			{
 				label: 'Notes',
@@ -80,6 +79,19 @@ const linkInfo = [
 			{
 				label: 'Weekly Report',
 				url: 'week3/report.html',
+			},
+		],
+	},
+	{
+		label: 'Week 4',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week4/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week4/report.html',
 			},
 		],
 	},
