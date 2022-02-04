@@ -95,6 +95,19 @@ const linkInfo = [
 			},
 		],
 	},
+	{
+		label: 'Week 5',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week5/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week5/report.html',
+			},
+		],
+	},
 ];
 
 const elPortfolio = document.querySelector('#portfolio');
