@@ -33,6 +33,10 @@ export default class HikesView {
     if (light === false) {
       item.innerHTML += `
           <div>
+              <h3>Directions</h3>
+              <p>${hike.directions}</p>
+          </div>
+          <div>
               <h3>Description</h3>
               <p>${hike.description}</p>
           </div>
