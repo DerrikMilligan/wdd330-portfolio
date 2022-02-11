@@ -42,6 +42,15 @@ const loadLinks = (list, links) => {
 
 const linkInfo = [
 	{
+		label: 'Projects',
+		subItems:  [
+			{
+				label: 'Todo App',
+				url: 'todos/index.html',
+			},
+		],
+	},
+	{
 		label: 'Week 1',
 		// url: 'week1/index.html',
 		subItems:  [
