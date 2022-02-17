@@ -117,6 +117,19 @@ const linkInfo = [
 			},
 		],
 	},
+	{
+		label: 'Week 7',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week7/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week7/report.html',
+			},
+		],
+	},
 ];
 
 const elPortfolio = document.querySelector('#portfolio');

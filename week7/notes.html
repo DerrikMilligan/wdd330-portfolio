@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 5 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+          Switchup this week. I'll do the examples and have some words that go along with them. This week we're looking at testing and debugging.
+				</p>
+
+				<p class="my-5">
+					The `Run Code` buttons load it in a typescript playground... Unfortunately it also prepends `#src/` so if you delete that then you can correctly run each of the examples.
+				</p>
+
+				<p class="my-5">
+          Switchup this week. I'll do the examples and have some words that go along with them. This week we're looking at testing and debugging.
+				</p>
+
+				<h2>5.1 Flattening</h2>
+        <p>
+          Here we flatten an array by using reduce. Because it's awesome and lets us build an array. We can flatten it and handle non arrays in it.
+        </p>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-javascript">
+let arrays = [[1, 2, 3], [4, 5], [6], 7, 8];
+
+console.log(arrays.reduce((acc, arr) => {
+  if (Array.isArray(arr)) {
+    return acc.concat(arr);
+  } else {
+    acc.push(arr);
+    return acc;
+  }
+}, []));
+// [1, 2, 3, 4, 5, 6, 7, 8]
+						</code>
+					</pre>
+				</div>
+
+				<h2>5.2 Your own loop</h2>
+        <p>
+          Here we are making our own loop. I used a recursive function but had an implementation with a while loop too.
+        </p>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-typescript">
+const loop = (state, testFn, eachIterFn, callableFn) => {
+  // Here we can do this recursively
+  callableFn(state);
+  const newState = eachIterFn(state);
+  if (testFn(newState)) {
+    return loop(newState, testFn, eachIterFn, callableFn);
+  }
+
+  // Here we can do it with a while loop but is a bit cheaty since we're making a custom loop
+  // let state = initialState;
+  // let iters = 0;
+
+  // while (testFn(state)) {
+  //   callableFn(state);
+  //   state = eachIterFn(state);
+  //   iters++;
+
+  //   // This is to prevent infinite loops while testing
+  //   if (iters > 10000) {
+  //     break;
+  //   }
+  // }
+}
+
+loop(3, n => n > 0, n => n - 1, console.log);
+// 3
+// 2
+// 1
+            </code>
+					</pre>
+				</div>
+
+
+				<h2>5.3 Everything</h2>
+        <p>
+          Here we're making an every function which is to see if each item in an array passes the test function given. I used reduce again because it looks clean. It potentially has overhead because it'll run for every item in the array even after it finds one that fails. So that could be improved upon.
+        </p>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-javascript">
+const every = (array, testFn) => {
+  return array.reduce((acc, item) => acc && testFn(item), true);
+}
+
+console.log(every([1, 3, 5], n => n < 10));
+// true
+console.log(every([2, 4, 16], n => n < 10));
+// false
+console.log(every([], n => n < 10));
+// true
+						</code>
+					</pre>
+				</div>
+
+
+				<h2>18.1 Content negotiation</h2>
+        <p>
+          Here we're visiting a website with various acceptance types to show that the response can change with the expected type.
+        </p>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-javascript">
+const baseUrl = "https://eloquentjavascript.net/author";
+
+const typesToTest = [
+  'text/plain',
+  'text/html',
+  'application/json',
+  'application/made+up',
+];
+
+const testTypes = (types) => {
+  types.forEach(async (type) => {
+    const response = await fetch(baseUrl, { headers: { accept: type } });
+    const body = await response.text();
+
+    console.log(`Testing ${type}: ${body}`);
+  });
+}
+
+testTypes(typesToTest);
+
+// Various output. Feel free to run it
+						</code>
+					</pre>
+				</div>
+
+
+
+				<h2>18.2 Javascript Workbench</h2>
+        <p>
+          Here we're making an every function which is to see if each item in an array passes the test function given. I used reduce again because it looks clean. It potentially has overhead because it'll run for every item in the array even after it finds one that fails. So that could be improved upon.
+        </p>
+				<div>
+					<button type="button" class="run-code btn">Run Code</button>
+					<pre>
+						<code class="language-html">
+&lt;textarea id="code"&gt;(function() { console.log('hello world'); return 1; })()&lt;/textarea&gt;
+&lt;button id="run" type="button"&gt;Run Code&lt;/button&gt;
+&lt;pre id="result"&gt;&lt;/pre&gt;
+
+&lt;script&gt;
+	const codeEl = document.querySelector('#code');
+	const runEl = document.querySelector('#run');
+	const resultEl = document.querySelector('#result');
+
+	runEl.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		let result = '';
+		try {
+			result = eval(codeEl.value);
+		} catch (e) {
+			result = e.message;
+		}
+
+		resultEl.innerHTML = result;
+	});
+&lt;/script&gt;
+
+						</code>
+					</pre>
+				</div>
+
+				<div>
+					<textarea id="code">(function() { console.log('hello world'); return 1; })()</textarea>
+					<button id="run" type="button" class="btn">Run Code</button>
+					<pre id="result"></pre>
+
+					<script>
+						const codeEl = document.querySelector('#code');
+						const runEl = document.querySelector('#run');
+						const resultEl = document.querySelector('#result');
+
+						runEl.addEventListener('click', (e) => {
+							e.preventDefault();
+
+							let result = '';
+							try {
+								result = eval(codeEl.value);
+							} catch (e) {
+								result = e.message;
+							}
+
+							resultEl.innerHTML = result;
+						});
+					</script>
+				</div>
+
+			</div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+
