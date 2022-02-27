@@ -130,6 +130,19 @@ const linkInfo = [
 			},
 		],
 	},
+	{
+		label: 'Week 8',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week8/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week8/report.html',
+			},
+		],
+	},
 ];
 
 const elPortfolio = document.querySelector('#portfolio');

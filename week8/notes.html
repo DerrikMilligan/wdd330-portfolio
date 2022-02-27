@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+      .emphasis {
+        @apply font-mono p-1 bg-stone-300 rounded;
+      }
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 5 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+          So this week was about several things. Here are some notes I have regarding them.
+				</p>
+
+				<p class="my-5">
+          First the CSS3 transform property, it's a very useful tool that will allow you to take any element on the page and
+          adjust it in several ways. You can <span class="emphasis">rotate</span>, <span class="emphasis">transform</span>, <span class="emphasis">scale</span>, and <span class="emphasis">skew</span> an element.
+        </p>
+
+				<p class="my-5">
+          For example lets take this image:
+        </p>
+
+        <img class="m-auto" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" />
+
+				<p class="my-5">
+          And now lets have some fun with transform properties!
+        </p>
+
+				<p class="my-5">
+          Smaller scale:
+        </p>
+        <img style="transform: scale(0.8);" class="m-auto" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" />
+
+				<p class="my-5">
+          Rotated(on a 3d axis even):
+        </p>
+        <img style="transform: rotate3d(1, 1, 1, 45deg);;" class="m-auto" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" />
+
+				<p class="my-5">
+          Translated to the right:
+        </p>
+        <img style="transform: rotate3d(1, 1, 1, 45deg);;" class="m-auto" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" />
+
+        <style>
+        @keyframes spinning {
+          from { transform: rotate(0deg) }
+          to { transform: rotate(360deg) }
+        }
+
+        .spin {
+          animation-name: spinning;
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
+          /* linear | ease | ease-in | ease-out | ease-in-out */
+          animation-timing-function: linear;
+        }
+        </style>
+
+				<p class="my-5">
+          Here's a spinning image with the css animation tools:
+        </p>
+
+        <img class="m-auto my-2 spin" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Example.png" />
+
+				<p class="my-5">
+          Here's the code to make the image spin
+        </p>
+
+        <pre>
+          <code lang="css">
+            @keyframes spinning {
+              from { transform: rotate(0deg) }
+              to { transform: rotate(360deg) }
+            }
+
+            .spin {
+              animation-name: spinning;
+              animation-duration: 3s;
+              animation-iteration-count: infinite;
+              /* linear | ease | ease-in | ease-out | ease-in-out */
+              animation-timing-function: linear;
+            }
+          </code>
+        </pre>
+
+				<p class="my-5">
+          Transitions are awesome for CSS animations and we can combine them with transforms! We tend to pick a specific property that you'd want
+          animated when it changes, how long it'll take to apply the change, and finally if you want an easing function applied.
+        </p>
+
+				<p class="my-5">
+          Animations are simlar to transitions but you specify keframe sets that define the properties at a given point and then apply
+          those keyframes to an element in an animation.
+        </p>
+
+				<p class="my-5">
+          The Canvas API is a really neat tool that allows for desiging totally custom graphics and your own rendering pipelines, if you 
+          want to do some more advanced rendering where you're in control of every pixel then this is the right tool for the job.
+        </p>
+
+				<p class="my-5">
+          SVG files are raster files that can hold a set of drawing instructions to render an image or icon. Because they're just
+          instructions for drawing, they can scale up to any size without degredation.
+        </p>
+
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+
