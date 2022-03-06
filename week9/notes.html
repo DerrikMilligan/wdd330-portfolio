@@ -51,29 +51,29 @@
           One of the things we discussed this week was the Window object. In the browser you can use a window object to store globals. So you can use something like <span class="emphasis">window.x = 2;</span> to create a sharable global variable across stuff. In NodeJs we can just declare a variable in the global scope to have it global with like <span class="emphasis">const x = 2;</span>.
 				</p>
 
-        <p>
+        <p class="m-2">
           The window object also contains other useful stuff such as the current location which you can use to re-direct someones page <span class="emphasis">window.location.href = "www.google.com";</span>.
         </p>
 
-        <div>
-          <button class="btn" onclick="window.location.href = 'www.google.com'">Click to go to Google.</button>
+        <div class="m-2">
+          <button class="btn" onclick="window.location.href = 'https://www.google.com'">Click to go to Google.</button>
         </div>
 
-        <p>
+        <p class="m-2">
           We also went over timing functions which are fantastic! You can use <span class="emphasis">setTimeout</span> to have something happen after a set duration.
         </p>
 
-        <div>
+        <div class="m-2">
           <button class="btn" onclick="setTimeout(alert, 1000, 'Hello World!');">Click for an alert after 1 second!</button>
         </div>
 
-        <p>
+        <p class="m-2">
           Likewise, <span class="emphasis">setInterval</span> can be used to have something occur repeatedly in an interval.
         </p>
 
-        <div>
+        <div class="m-2">
           <button class="btn" onclick="setInterval(function() {
-            const el = document.querySelector('counter');
+            const el = document.querySelector('#counter');
             el.innerText = (Number.parseInt(el.innerText) + 1).toString();
           }, 1000);">
             Start Counting
@@ -81,25 +81,11 @@
           <div>Current Count: <span id="counter">0</span></div>
         </div>
 
-        <p>
-          Likewise, <span class="emphasis">setInterval</span> can be used to have something occur repeatedly in an interval.
-        </p>
-
-        <div>
-          <button class="btn" onclick="setInterval(function() {
-            const el = document.querySelector('counter');
-            el.innerText = (Number.parseInt(el.innerText) + 1).toString();
-          }, 1000);">
-            Start Counting
-          </button>
-          <div>Current Count: <span id="counter">0</span></div>
-        </div>
-
-        <p>
+        <p class="m-2">
           The <span class="emphasis">data</span> attributes can be used to store arbitrary data on elements and can be accessed with the <span class="emphasis">element.dataset</span> attribute.
         </p>
 
-        <p>
+        <p class="m-2">
           The canvas is great an exciting if you want to be able to manually draw any shape you want and to manipulate them in more advanced ways. They are often used for highly complex drawings such as google maps, or for games.
         </p>
 
