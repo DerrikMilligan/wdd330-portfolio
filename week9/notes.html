@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+      .emphasis {
+        @apply font-mono p-1 bg-stone-300 rounded;
+      }
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 9 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="my-5">
+          One of the things we discussed this week was the Window object. In the browser you can use a window object to store globals. So you can use something like <span class="emphasis">window.x = 2;</span> to create a sharable global variable across stuff. In NodeJs we can just declare a variable in the global scope to have it global with like <span class="emphasis">const x = 2;</span>.
+				</p>
+
+        <p>
+          The window object also contains other useful stuff such as the current location which you can use to re-direct someones page <span class="emphasis">window.location.href = "www.google.com";</span>.
+        </p>
+
+        <div>
+          <button class="btn" onclick="window.location.href = 'www.google.com'">Click to go to Google.</button>
+        </div>
+
+        <p>
+          We also went over timing functions which are fantastic! You can use <span class="emphasis">setTimeout</span> to have something happen after a set duration.
+        </p>
+
+        <div>
+          <button class="btn" onclick="setTimeout(alert, 1000, 'Hello World!');">Click for an alert after 1 second!</button>
+        </div>
+
+        <p>
+          Likewise, <span class="emphasis">setInterval</span> can be used to have something occur repeatedly in an interval.
+        </p>
+
+        <div>
+          <button class="btn" onclick="setInterval(function() {
+            const el = document.querySelector('counter');
+            el.innerText = (Number.parseInt(el.innerText) + 1).toString();
+          }, 1000);">
+            Start Counting
+          </button>
+          <div>Current Count: <span id="counter">0</span></div>
+        </div>
+
+        <p>
+          Likewise, <span class="emphasis">setInterval</span> can be used to have something occur repeatedly in an interval.
+        </p>
+
+        <div>
+          <button class="btn" onclick="setInterval(function() {
+            const el = document.querySelector('counter');
+            el.innerText = (Number.parseInt(el.innerText) + 1).toString();
+          }, 1000);">
+            Start Counting
+          </button>
+          <div>Current Count: <span id="counter">0</span></div>
+        </div>
+
+        <p>
+          The <span class="emphasis">data</span> attributes can be used to store arbitrary data on elements and can be accessed with the <span class="emphasis">element.dataset</span> attribute.
+        </p>
+
+        <p>
+          The canvas is great an exciting if you want to be able to manually draw any shape you want and to manipulate them in more advanced ways. They are often used for highly complex drawings such as google maps, or for games.
+        </p>
+
+      </div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+

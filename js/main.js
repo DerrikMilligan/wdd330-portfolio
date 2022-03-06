@@ -19,7 +19,7 @@ const loadLinks = (list, links) => {
 	// Wipe out the current list
 	list.innerHTML = '';
 
-	// Loop over each 
+	// Loop over each
 	links.forEach((info) => {
 		const link = createListItemLink(info.label, info.url);
 
@@ -140,6 +140,19 @@ const linkInfo = [
 			{
 				label: 'Weekly Report',
 				url: 'week8/report.html',
+			},
+		],
+	},
+	{
+		label: 'Week 9',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: 'week9/notes.html',
+			},
+			{
+				label: 'Weekly Report',
+				url: 'week9/report.html',
 			},
 		],
 	},
