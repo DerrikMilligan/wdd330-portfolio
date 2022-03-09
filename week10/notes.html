@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js" integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script>hljs.highlightAll();</script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+			li { @apply mt-2; }
+
+			/* https://devdojo.com/tailwindcss/buttons# */
+			button.btn {
+				@apply inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+			}
+
+			.run-code {
+				float: right;
+				top: 40px;
+				position: relative;
+				right: 20px;
+			}
+
+			pre code.hljs {
+				/* Fix up the overflow... Just don't write really long lines of code dood */
+				overflow-x: visible !important;
+			}
+
+			.card {
+				@apply flex justify-center m-4 bg-slate-50 shadow;
+			}
+
+			.card .card-body {
+				@apply w-5/6 p-5;
+			}
+
+			h2 {
+				@apply text-2xl font-bold;
+			}
+
+      .emphasis {
+        @apply font-mono p-1 bg-stone-300 rounded;
+      }
+
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Week 10 Notes</h1>
+			<div class="mx-10 mt-2">
+				<p class="m-2 mt-5">
+          Form validation is something that we can do on the frontend but we can not rely solely on the frontend to validate our data. We always need to validate on the backend in case of tampering.
+				</p>
+
+				<p class="m-2">
+					Form validation is helping users fill out forms with the necessary information. Whether that be required input fields, email fields, or number fields, we can use validation to try and ensure that the data a user has input is valid data before we submit it to the backend.
+				</p>
+
+        <p class="m-2">
+          The most common type of validation is having a field be <span class="emphasis">required</span>. A required field is one that must be filled out.
+        </p>
+
+				<p class="m-2">
+          Knowing that a field is required is more useful to a user if there's some sort of visual feedback letting them know that something is amiss. Thankfully there's some extra CSS pseudo selectors that can help us out. <span class="emphasis">:invalid</span> can help us know when the requirements haven't been met, and so we can add styles that change how the form looks when it's invalid.
+        </p>
+
+				<pre>
+					<code lang="css">
+&lt;style&gt;
+	#required {
+		border: 1px solid green;
+	}
+
+	#required:invalid {
+		border: 1px dashed red;
+	}
+&lt;/style&gt;
+					</code>
+				</pre>
+
+				<style>
+					#required {
+						border: 1px solid green;
+					}
+
+					#required:invalid {
+						border: 1px dashed red;
+					}
+				</style>
+
+				<div class="card">
+					<div class="card-body flex justify-center gap-2">
+						<label for="required">First Name:</label>
+						<input type="text" name="required" id="required" required class="outline-0">
+					</div>
+				</div>
+
+				<p class="m-2">
+					And now you can see the input has a green border when it has data and a red one when it's empty as it's got the required attribute. <span class="emphasis">&lt;input type="text" required&gt;</span>
+				</p>
+
+				<p class="m-2">
+					There are <a class="text-emerald-500" href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation" target="_blank">many</a> different types of form validation that you can use besides required. We can use <span class="emphasis">min</span> and <span class="emphasis">max</span> on number inputs to keep the number within a given range.
+				</p>
+
+				<div class="card">
+					<div class="card-body flex justify-center gap-2">
+						<label for="number-game">Number between 1 and 100:</label>
+						<input type="number" name="number-game" id="number-game" number-game min="1" max="100" class="outline-0">
+					</div>
+				</div>
+
+				<p class="m-2">
+					Or we can use <span class="emphasis">minLength</span> and <span class="emphasis">maxLength</span> on text fields to ensure there are a minimum or maximum number of characters.
+				</p>
+
+				<div class="card">
+					<div class="card-body flex justify-center gap-2">
+						<label for="password">Password:</label>
+						<input type="password" name="password" id="password" required minLength="10" maxLength="50" class="outline-0">
+					</div>
+					<div>Must be between 10 and 50 characters</div>
+				</div>
+
+				<p class="m-2">
+					Along with all these fun CSS and HTML validators, there's also the <span class="emphasis">Constraint Validation API</span> which lets use use Javascript to verify these constraints as well! We have access to new properties such as <span class="emphasis">validity</span> and <span class="emphasis">validationMessage</span> to enhance our forms and verify the data in our code as well.
+				</p>
+
+				<pre>
+					<code lang="javascript">
+const input = document.querySelector('#password-check');
+const message = document.querySelector('#password-check-message');
+
+input.addEventListener('input', () => {
+	message.innerText = input.validationMessage;
+});
+					</code>
+				</pre>
+
+				<p class="m-2">
+					Note how we can update the message with a nice error validation message. Every keypress we can update the message with what is wrong with the input.
+				</p>
+
+				<div class="card flex-col">
+					<div class="card-body flex justify-center gap-2">
+						<label for="password-check">Password:</label>
+						<input type="password" name="password-check" id="password-check" required minLength="10" maxLength="20" class="outline-0">
+					</div>
+					<div id="password-check-message" class="text-center text-red-500"></div>
+				</div>
+
+				<script>
+					const input = document.querySelector('#password-check');
+					const message = document.querySelector('#password-check-message');
+
+					input.addEventListener('input', () => {
+						message.innerText = input.validationMessage;
+					});
+				</script>
+
+				<p class="m-2">
+					Fetch is great! It allows us to make web requests without having to use <span class="emphasis">XMLHttpRequest</span>. Thank heavens! It's so much cleaner to use!
+				</p>
+
+				<pre>
+					<code lang="javascript">
+const pokeEl = document.querySelector('#poke-list');
+
+const getPokemon = async (page = 0) => {
+	const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${page}`);
+	if (response.ok) {
+		const data = await response.json();
+		pokeEl.innerHTML = '';
+		data.results.forEach(pokemon => {
+			const div = document.createElement('div');
+			div.innerText = pokemon.name;
+			pokeEl.append(div);
+		});
+	}
+	return null;
+}
+
+getPokemon(0);
+					</code>
+				</pre>
+
+				<p class="m-2">
+					Here's an example of us using fetch to get pokemon from the pokemon API. We'll output the first 10 pokemon below.
+				</p>
+
+				<ul id="poke-list">
+
+				</ul>
+
+				<script>
+					const pokeEl = document.querySelector('#poke-list');
+
+					const getPokemon = async (page = 0) => {
+						const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${page}`);
+						if (response.ok) {
+							const data = await response.json();
+							pokeEl.innerHTML = '';
+							data.results.forEach(pokemon => {
+								const li = document.createElement('li');
+								li.innerText = pokemon.name;
+								pokeEl.append(li);
+							});
+						}
+						return null;
+					}
+
+					getPokemon(0);
+				</script>
+
+      </div>
+		</div>
+
+		<script lang="text/javascript">
+			document.querySelectorAll('.run-code').forEach(el => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault;
+
+					const exampleCode = el.nextElementSibling.innerText.trim();
+
+					// This isn't perfect as we end up with the stupid #src/ in the code but I can't remove that or we don't get the code
+					window.open(`https://www.typescriptlang.org/play?filetype=ts#src/${encodeURIComponent(exampleCode)}`, '_blank');
+				});
+			});
+		</script>
+	</body>
+</html>
+

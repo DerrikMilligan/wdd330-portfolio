@@ -50,113 +50,33 @@ const linkInfo = [
 			},
 		],
 	},
-	{
-		label: 'Week 1',
-		// url: 'week1/index.html',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week1/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week1/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 2',
-		// url: 'week1/index.html',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week2/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week2/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 3',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week3/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week3/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 4',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week4/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week4/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 5',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week5/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week5/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 7',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week7/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week7/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 8',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week8/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week8/report.html',
-			},
-		],
-	},
-	{
-		label: 'Week 9',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: 'week9/notes.html',
-			},
-			{
-				label: 'Weekly Report',
-				url: 'week9/report.html',
-			},
-		],
-	},
 ];
+
+// Keep a list of weeks we didn't do notes
+const weeksToSkip = [ 6 ];
+
+// Add a set of links for each week's notes
+for (let i = 1; i <= 10; i++) {
+	if (weeksToSkip.includes(i)) {
+		continue;
+	}
+
+	linkInfo.push({
+		label: `Week ${i}`,
+		// url: 'week1/index.html',
+		subItems:  [
+			{
+				label: 'Notes',
+				url: `week${i.toString().padStart(2, '0')}/notes.html`,
+			},
+			{
+				label: 'Weekly Report',
+				url: `week0${i.toString().padStart(2, '0')}/report.html`,
+			},
+		],
+	});
+}
+
 
 const elPortfolio = document.querySelector('#portfolio');
 
