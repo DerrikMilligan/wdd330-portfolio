@@ -71,7 +71,7 @@ for (let i = 1; i <= 10; i++) {
 			},
 			{
 				label: 'Weekly Report',
-				url: `week0${i.toString().padStart(2, '0')}/report.html`,
+				url: `week${i.toString().padStart(2, '0')}/report.html`,
 			},
 		],
 	});
