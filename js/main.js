@@ -54,27 +54,35 @@ const linkInfo = [
 
 // Keep a list of weeks we didn't do notes
 const weeksToSkip = [ 6 ];
+const weeksWithoutNotes = [ 11 ];
+const weeksWithoutReport = [];
 
 // Add a set of links for each week's notes
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 11; i++) {
 	if (weeksToSkip.includes(i)) {
 		continue;
 	}
 
-	linkInfo.push({
+	const weekInfo = {
 		label: `Week ${i}`,
-		// url: 'week1/index.html',
-		subItems:  [
-			{
-				label: 'Notes',
-				url: `week${i.toString().padStart(2, '0')}/notes.html`,
-			},
-			{
-				label: 'Weekly Report',
-				url: `week${i.toString().padStart(2, '0')}/report.html`,
-			},
-		],
-	});
+		subItems: [],
+	};
+
+	if (weeksWithoutNotes.includes(i) === false) {
+		weekInfo.subItems.push({
+			label: 'Notes',
+			url  : `week${i.toString().padStart(2, '0')}/notes.html`,
+		});
+	}
+
+	if (weeksWithoutReport.includes(i) === false) {
+		weekInfo.subItems.push({
+			label: 'Weekly Report',
+			url  : `week${i.toString().padStart(2, '0')}/report.html`,
+		});
+	}
+
+	linkInfo.push(weekInfo);
 }
 
 
