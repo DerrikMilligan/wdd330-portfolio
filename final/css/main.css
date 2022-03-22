@@ -1,0 +1,41 @@
+
+@import url(https://fonts.googleapis.com/css?family=Oxygen);
+
+body {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.color-picker {
+  display: inline-block;
+  position: relative;
+
+  /**
+   * This gives us our nice checkerboard background when there's no color selected
+   * @link https://css-tricks.com/background-patterns-simplified-by-conic-gradients/#checkerboard
+   */
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1)),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.1) 75%, rgba(255, 255, 255, 0.1));
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+  border-radius: 10px;
+}
+
+.color-box {
+  border: 1px solid rgb(75 85 99); /* bg-gray-600 */
+  border-radius: 5px;
+}
+
+.color-wheel {
+  display: none;
+  z-index: 1000;
+}
+
+/* Only show the pointer if the color picker isn't readonly */
+.color-picker:not([readonly]) .color-box:hover {
+  cursor: pointer;
+}
+
+[data-show] {
+  display: block !important;
+}

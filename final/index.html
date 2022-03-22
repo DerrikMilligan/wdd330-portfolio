@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Mind</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="./css/main.css" />
+  <style type="text/tailwindcss">
+    .color-box {
+      @apply w-16 h-16;
+    }
+
+    .color-wheel {
+      @apply p-3 bg-gray-800 rounded-2xl border border-gray-600;
+    }
+
+    .btn {
+      @apply
+        inline-block
+        px-6
+        py-2.5
+        bg-blue-600
+        text-white
+        font-medium
+        text-xs
+        leading-tight
+        uppercase
+        rounded
+        shadow-md
+        hover:bg-blue-700
+        hover:shadow-lg
+        focus:bg-blue-700
+        focus:shadow-lg
+        focus:outline-none
+        focus:ring-0
+        active:bg-blue-800
+        active:shadow-lg
+        transition
+        duration-150
+        ease-in-out;
+    }
+
+    .input {
+      @apply
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 flex justify-center">
+  <div id="app" class="w-11/12 md:w-6/12">
+    <h1 class="text-gray-100 text-3xl m-2">Input</h1>
+
+    <div class="color-input">
+      <div class="color-picker"></div>
+      <div class="color-picker"></div>
+      <div class="color-picker"></div>
+      <div class="color-picker"></div>
+      <div class="color-picker"></div>
+    </div>
+
+    <div class="flex my-2 gap-2">
+      <button id="generate-colors" class="btn">Generate</button>
+      <button id="clear-input" class="btn">Clear Input</button>
+    </div>
+
+    <h1 class="text-gray-100 text-3xl m-2">Output</h1>
+    <div class="color-output">
+      <div class="color-picker" readonly></div>
+      <div class="color-picker" readonly></div>
+      <div class="color-picker" readonly></div>
+      <div class="color-picker" readonly></div>
+      <div class="color-picker" readonly></div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/index.js"></script>
+</body>
+</html>

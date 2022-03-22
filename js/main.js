@@ -48,6 +48,10 @@ const linkInfo = [
 				label: 'Todo App',
 				url: 'todos/index.html',
 			},
+			{
+				label: 'Final',
+				url: 'final/index.html',
+			},
 		],
 	},
 ];
