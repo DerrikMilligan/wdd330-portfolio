@@ -4,7 +4,7 @@ import { apiRequest } from '../util.js';
 export class ColorMind {
 
   constructor() {
-    this.baseURL = 'http://colormind.io';
+    this.baseURL = 'https://corsanywhere.herokuapp.com/colormind.io';
   }
 
   /**
