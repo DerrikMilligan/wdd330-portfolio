@@ -58,11 +58,11 @@ const linkInfo = [
 
 // Keep a list of weeks we didn't do notes
 const weeksToSkip = [ 6 ];
-const weeksWithoutNotes = [ 11 ];
+const weeksWithoutNotes = [ 11, 12 ];
 const weeksWithoutReport = [];
 
 // Add a set of links for each week's notes
-for (let i = 1; i <= 11; i++) {
+for (let i = 1; i <= 12; i++) {
 	if (weeksToSkip.includes(i)) {
 		continue;
 	}

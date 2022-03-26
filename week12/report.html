@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WDD 330 portfolio</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<style type="text/tailwindcss">
+			html { font-size: 20px; }
+
+			.emphasis {
+        @apply font-mono p-1 bg-stone-300 rounded;
+      }
+		</style>
+
+	</head>
+	<body class="bg-stone-200 w-100 h-100 flex justify-center">
+		<div class="w-full lg:w-2/3 mt-2">
+			<a class="text-sky-600 underline relative float-left" style="left: -60px; top: 15px;" href="../index.html">Back</a>
+			<h1 class="text-3xl font-bold bg-emerald-500 text-gray-200 rounded px-5 py-10 mt-3">Derrik Milligan's WDD 330 portfolio</h1>
+			<div class="mx-10 mt-2">
+				<p><b>What did I do since the last meeting?</b></p>
+				<p>
+					This week our team meeting was going over our finals. They had some good ideas for overcoming the <span class="emphasis">HTTPS</span> making a request to an <span class="emphasis">HTTP</span> site for me. The ColorMind API doesn't work through HTTPS, so I'm having to set up a small proxy on Heroku that will make the request for us and then just forward the response... Oh well at least that is working now.
+				</p>
+
+				<p><b>What am I going to do next?</b></p>
+				<p>
+					Now I need to get the <span class="emphasis">localStorage</span> set up so you can save colors you'd like to it. Then I need to expand the history so you can generate a few at a time without having to commit to saving one to your history.
+				</p>
+
+				<p><b>What are my blockers?</b></p>
+				<p>
+					Right now I feel like I'm caught up and doing well.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
+
