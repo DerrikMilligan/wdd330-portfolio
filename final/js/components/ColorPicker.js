@@ -213,10 +213,6 @@ export class ColorPicker {
 
     this.color = color;
 
-    if (ColorPicker.colorWheel !== null) {
-      ColorPicker.colorWheel.color.set(this.color.toHex());
-    }
-
     this.setBoxColor();
   }
 

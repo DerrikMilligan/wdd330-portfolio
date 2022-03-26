@@ -4,7 +4,10 @@ import { apiRequest } from '../util.js';
 export class ColorMind {
 
   constructor() {
-    this.baseURL = 'https://corsanywhere.herokuapp.com/colormind.io';
+    // this.baseURL = 'https://corsanywhere.herokuapp.com/colormind.io';
+    this.baseURL = window.location.toString().includes('derrikmilligan.github.io')
+      ? 'https://derriks-cors-proxy.herokuapp.com/colormind.io'
+      : 'http://colormind.io';
   }
 
   /**
