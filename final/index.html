@@ -18,15 +18,38 @@
   </style>
 </head>
 <body class="bg-gray-900 flex justify-center">
-  <div id="app" class="w-11/12 md:w-6/12">
+  <div id="app" class="w-11/12 md:w-6/12 flex flex-col items-center md:items-start">
     <h1 class="text-gray-100 text-3xl m-2">Input</h1>
 
-    <div class="color-input">
-      <div class="color-picker"></div>
-      <div class="color-picker"></div>
-      <div class="color-picker"></div>
-      <div class="color-picker"></div>
-      <div class="color-picker"></div>
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="color-input swatch">
+        <div class="color-picker" display-color></div>
+        <div class="color-picker" display-color></div>
+        <div class="color-picker" display-color></div>
+        <div class="color-picker" display-color></div>
+        <div class="color-picker" display-color></div>
+      </div>
+
+      <div class="ml-2">
+        <button id="generation-select" class="btn dropdown w-36">
+          <span class="flex-grow">Select Model</span>
+          <svg
+            class="w-5 h-5 text-gray-800 dark:text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+
+        <div id="generation-models" class="dropdown-menu">
+        </div>
+      </div>
     </div>
 
     <div class="flex my-2 gap-2">
@@ -35,12 +58,7 @@
     </div>
 
     <h1 class="text-gray-100 text-3xl m-2">Output</h1>
-    <div class="color-output">
-      <div class="color-picker" readonly></div>
-      <div class="color-picker" readonly></div>
-      <div class="color-picker" readonly></div>
-      <div class="color-picker" readonly></div>
-      <div class="color-picker" readonly></div>
+    <div class="color-history">
     </div>
   </div>
 

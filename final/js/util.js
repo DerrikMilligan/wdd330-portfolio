@@ -37,3 +37,27 @@ export const apiRequest = async (method, url, data = undefined, headers = {}) =>
 
   throw new Error(`Something went wrong with the request ${response.statusText}`);
 }
+
+/**
+ * Converts a string to nice title case
+ *
+ * @param {string} str the string to convert
+ * @returns {string} the converted string
+ */
+export const titleCase = (str) => {
+  return str.toLowerCase().split(' ').map((word) => {
+    return word.replace(word[0], word[0].toUpperCase());
+  }).join(' ');
+}
+
+/**
+ * Helper to know whether we're local or live
+ *
+ * @returns {Boolean} whether or not we're on the github pages site
+ */
+export const onGithub = () => {
+  return window.location.toString().includes('derrikmilligan.github.io');
+}
+
+export const isLive = onGithub();
+export const isDev  = !isLive;

@@ -1,11 +1,14 @@
 import { Color } from './Color.js';
-import { apiRequest } from '../util.js';
+import { apiRequest, isLive } from '../util.js';
 
 export class ColorMind {
 
   constructor() {
-    // this.baseURL = 'https://corsanywhere.herokuapp.com/colormind.io';
-    this.baseURL = window.location.toString().includes('derrikmilligan.github.io')
+    // Because github pages is an HTTPS page and the colormind app only functions over
+    // http there are new browser rules that prevent a secure page from making a web
+    // request the a page that isn't secure. So I've had to set up a proxy that we use
+    // while on the github site.
+    this.baseURL = isLive
       ? 'https://derriks-cors-proxy.herokuapp.com/colormind.io'
       : 'http://colormind.io';
   }
@@ -38,12 +41,23 @@ export class ColorMind {
       throw new Error("Can't use more than 5 input colors!");
     }
 
+    // const randomColors = [];
+    // for (let i = 0; i < 5; i++) {
+    //   randomColors.push([
+    //     Math.random() * 255,
+    //     Math.random() * 255,
+    //     Math.random() * 255,
+    //   ]);
+    // }
+
+    // return Color.fromArray(randomColors);
+
     const params = { model, input: [] };
 
     if (inputColors.length > 0) {
       params.input = inputColors.map((color) => {
         if (color instanceof Color) {
-          return color.toRgbArray();
+          return color.asRgbArray;
         }
 
         if (Array.isArray(color)) {
@@ -69,3 +83,10 @@ export class ColorMind {
   }
 
 }
+
+/**
+ * We only ever really want one of this class instantiated,
+ * so this instantiates it and exports it so we can use it as
+ * a singleton.
+ */
+export default new ColorMind();

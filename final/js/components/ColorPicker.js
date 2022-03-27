@@ -1,5 +1,16 @@
 import { Color } from '../models/Color.js';
 
+/**
+ * ColorPicker
+ *
+ * A class that is a component that will bind to an HTML element
+ * to display a color picker component. A square that displays a color
+ * with the option of it being interactive and having the ability to
+ * display a color popover to select new colors.
+ *
+ * Each ColorPicker shares the same popup to try and be efficient with
+ * memory.
+ */
 export class ColorPicker {
 
   static colorWheelEl      = null;
@@ -7,7 +18,9 @@ export class ColorPicker {
   static activeColorPicker = null;
 
   /**
-   * Create the color wheel elements and picker and attach it to the page
+   * Create the color wheel elements and picker and attach it to the page.
+   * This is done statically because we only want one instance of the color
+   * wheel to be shared by all the color pickers.
    */
   static createColorWheel() {
     // Create the color wheel container element
@@ -75,7 +88,7 @@ export class ColorPicker {
 
     // Any time the color changes whether user based or not update the hex box
     ColorPicker.colorWheel.on('color:change', (newColor) => {
-      hexValue.value = newColor.hexString;
+      hexValue.value = newColor.hexString.toUpperCase();
     });
 
     // Update the activeColorPicker state when the user changes the color
@@ -134,10 +147,12 @@ export class ColorPicker {
     this.el             = el;
     this.pickerSettings = pickerSettings;
 
-    this.colorBox = null;
-    this.popper   = null;
+    this.colorBox    = null;
+    this.colorBoxHex = null;
+    this.popper      = null;
 
     this.interactive = el.hasAttribute('readonly') === false;
+    this.displayHex  = el.hasAttribute('display-color');
 
     this.render();
   }
@@ -168,8 +183,16 @@ export class ColorPicker {
 
     // Create our div, add the color-box class and set it's background color
     this.colorBox = document.createElement('div');
-    this.colorBox.classList.add('color-box');
-    this.colorBox.classList.add('drop-shadow');
+    this.colorBox.classList.add('color-box', 'drop-shadow');
+
+    if (this.displayHex) {
+      this.colorBoxHex = document.createElement('div');
+      this.colorBoxHex.classList.add('hex');
+      this.colorBoxHex.innerText = this.color.asHex;
+
+      this.colorBox.appendChild(this.colorBoxHex);
+    }
+
     this.setBoxColor();
 
     // For interactive color pickers create the popper with the colorWheel
@@ -195,7 +218,7 @@ export class ColorPicker {
         ColorPicker.activeColorPicker = this;
 
         // Now load the current color into the colorWheel
-        ColorPicker.colorWheel.color.set(this.color.toHex());
+        ColorPicker.colorWheel.color.set(this.color.asHex);
 
         // And update the popper's location
         this.popper.update();
@@ -243,8 +266,27 @@ export class ColorPicker {
    */
    setBoxColor() {
     if (this.colorBox) {
-      this.colorBox.style.backgroundColor = this.color.toHex();
+      this.colorBox.style.backgroundColor = this.color.asHexWithAlpha;
+    }
+
+    if (this.colorBoxHex) {
+      if (this.color._a === 0) {
+        this.colorBoxHex.style.display = 'none';
+      } else {
+        this.colorBoxHex.style.display = 'block';
+      }
+
+      this.colorBoxHex.innerText = this.color.asHex;
+
+      // Add or remove the color class based on if the color is dark
+      if (this.color.isDarkColor) {
+        this.colorBoxHex.classList.add('dark');
+      } else {
+        this.colorBoxHex.classList.remove('dark');
+      }
     }
   }
 
 }
+
+export default ColorPicker;
