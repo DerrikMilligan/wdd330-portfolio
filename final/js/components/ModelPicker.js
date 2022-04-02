@@ -31,7 +31,7 @@ export class ModelPicker {
       button.dataset.value = model;
 
       // When setting the button text lets clean it up and make it title case
-      button.innerText = titleCase(model.replace('_', ' '));
+      button.innerText = titleCase(model.replace(/_/ig, ' '));
 
       // If it's currently selected add the attribute
       if (this.selectedModel === model)

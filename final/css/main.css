@@ -7,7 +7,8 @@ body {
 
 .swatch {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   margin: 5px;
 }
@@ -29,14 +30,16 @@ body {
 }
 
 .color-box {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border: 1px solid rgb(75 85 99); /* bg-gray-600 */
   border-radius: 5px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: background-color 1s ease-out 0s;
 }
 
 .color-box .hex {
@@ -45,6 +48,8 @@ body {
   font-weight: bold;
   color: #000000;
   bottom: 5px;
+
+  transition: color 0.5s ease-out 0s;
 }
 
 .color-box .hex.dark {
@@ -108,6 +113,23 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.btn.icon {
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn.icon span {
+  position: relative;
+  bottom: 2px;
+}
+
 .btn:hover {
   background-color: #1D4ED8;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -134,6 +156,7 @@ body {
 
 .dropdown-menu {
   display: none;
+  z-index: 100;
   position: absolute;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -153,19 +176,36 @@ body {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  color: #D1D5DB;
   color: #374151;
   font-size: 0.875rem;
   line-height: 1.25rem;
   width: 100%;
 }
 
-.dropdown-menu button[selected] {
-  background-color: rgb(147 197 253);
-  color: #ffffff;
-}
-
 .dropdown-menu button:hover {
   background-color: #9CA3AF;
   color: #ffffff;
 }
+
+.dropdown-menu button[selected] {
+  background-color: rgb(59 130 246);
+  color: #ffffff;
+}
+
+.dropdown-menu button[selected]:hover {
+  background-color: rgb(59 130 246);
+}
+
+@media (min-width: 768px) {
+  .color-box {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .btn.icon {
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+  }
+}
+

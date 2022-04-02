@@ -18,7 +18,7 @@
   </style>
 </head>
 <body class="bg-gray-900 flex justify-center">
-  <div id="app" class="w-11/12 md:w-6/12 flex flex-col items-center md:items-start">
+  <div id="app" class="w-11/12 md:w-1/2 flex flex-col items-center md:items-start">
     <h1 class="text-gray-100 text-3xl m-2">Input</h1>
 
     <div class="flex flex-col md:flex-row items-center">
@@ -57,9 +57,20 @@
       <button id="clear-input" class="btn">Clear Input</button>
     </div>
 
-    <h1 class="text-gray-100 text-3xl m-2">Output</h1>
-    <div class="color-history">
+    <div class="flex flex-col flex-wrap md:flex-row">
+      <div class="flex flex-col md:mr-4">
+        <h1 class="text-gray-100 text-3xl m-2">Output</h1>
+        <div id="color-history"></div>
+      </div>
+
+      <div class="flex flex-col">
+        <h1 class="text-gray-100 text-3xl m-2">Saved</h1>
+        <div id="saved-colors"></div>
+      </div>
     </div>
+
+
+
   </div>
 
   <script type="module" src="./js/index.js"></script>

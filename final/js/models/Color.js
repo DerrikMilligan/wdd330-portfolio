@@ -37,6 +37,15 @@ export class Color {
   }
 
   /**
+   * Clones a color so you get a new object
+   *
+   * @param {Color} color the color to clone
+   */
+  static clone(color) {
+    return new Color(color.r, color.g, color.b, color.a);
+  }
+
+  /**
    * Creates a color instance
    *
    * @param {number} r red
@@ -71,6 +80,16 @@ export class Color {
     if (value < 0 || value > 255) {
       throw new Error(`[Color][ensureProperValue] Invalid value! Must be between 0 and 255. Given: '${value}'`);
     }
+  }
+
+  /**
+   * Reset a color to a transparent black.
+   */
+  reset() {
+    this._r = 0;
+    this._g = 0;
+    this._b = 0;
+    this._a = 0;
   }
 
   /** Color setters */

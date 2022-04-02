@@ -1,5 +1,6 @@
 import { ColorPicker  } from './components/ColorPicker.js';
 import { ColorHistory } from './components/ColorHistory.js';
+import { SavedColors  } from './components/SavedColors.js';
 import { Dropdown     } from './components/Dropdown.js';
 import { ModelPicker  } from './components/ModelPicker.js';
 import { Color        } from './models/Color.js';
@@ -20,7 +21,8 @@ if (isLive) {
   }, 500);
 }
 
-const colorHistory = new ColorHistory(document.querySelector('.color-history'));
+const savedColors = new SavedColors(document.querySelector('#saved-colors'));
+const colorHistory = new ColorHistory(document.querySelector('#color-history'), savedColors.saveSwatch.bind(savedColors));
 const modelPicker = new ModelPicker(document.querySelector('#generation-models'));
 
 ColorPicker.init();

@@ -5,12 +5,14 @@ export const swatchSize = 5;
 export class ColorHistory {
 
   /**
-   * @param {HTMLElement} el the element we're mounting to
-   * @param {Number} historyLength the number of rows to store in the history queue
+   * @param {HTMLElement}            el            the element we're mounting to
+   * @param {fn(Array<Color>): void} saveSwatch    a callback function for saving a swatch
+   * @param {Number}                 historyLength the number of rows to store in the history queue
    */
-  constructor(el, historyLength = 5) {
+  constructor(el, saveSwatch = null, historyLength = 5) {
     this.el = el;
     this.historyLength = historyLength;
+    this.saveSwatch = saveSwatch;
 
     this.histories = [];
 
@@ -29,6 +31,7 @@ export class ColorHistory {
       // An object to contain all the info for this 'history'
       const history = {
         historyEl: colorOutput,
+        saveButton: null,
         colorPickers: [],
       }
 
@@ -45,8 +48,27 @@ export class ColorHistory {
         colorOutput.append(colorPicker);
       }
 
+      const saveButton = document.createElement('button');
+      saveButton.classList.add('btn', 'icon');
+      const saveIcon = document.createElement('span');
+      saveIcon.innerText = '+';
+      saveButton.append(saveIcon);
+
+      saveButton.addEventListener('click', () => {
+        // Check to see if we even have a color before attempting to save it
+        const hasColor = history.colorPickers.reduce((acc, picker) => acc || picker.color.a > 0, false);
+
+        // If we have a color and a saveSwatch function then send off the colors
+        if (hasColor && this.saveSwatch) {
+          this.saveSwatch(history.colorPickers.map((picker) => picker.color));
+        }
+      });
+
+      history.saveButton = saveButton;
+
       this.histories.push(history);
 
+      colorOutput.append(saveButton);
       this.el.append(colorOutput);
     }
   }

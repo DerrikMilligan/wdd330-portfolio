@@ -175,6 +175,14 @@ export class ColorPicker {
   }
 
   /**
+   * Resets the internal color and updates the box color
+   */
+  resetColor() {
+    this.color.reset();
+    this.setBoxColor();
+  }
+
+  /**
    * Clear out the element, render a color box and the picker if we're
    * in interactive mode
    */
