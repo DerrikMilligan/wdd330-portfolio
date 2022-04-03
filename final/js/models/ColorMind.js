@@ -41,17 +41,6 @@ export class ColorMind {
       throw new Error("Can't use more than 5 input colors!");
     }
 
-    // const randomColors = [];
-    // for (let i = 0; i < 5; i++) {
-    //   randomColors.push([
-    //     Math.random() * 255,
-    //     Math.random() * 255,
-    //     Math.random() * 255,
-    //   ]);
-    // }
-
-    // return Color.fromArray(randomColors);
-
     const params = { model, input: [] };
 
     if (inputColors.length > 0) {
